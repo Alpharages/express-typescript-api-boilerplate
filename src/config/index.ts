@@ -6,6 +6,7 @@ dotenv.config();
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().default('3000'),
+  DATABASE_CLIENT: z.string(),
   DATABASE_URL: z.string(),
   SENTRY_DSN: z.string().optional(),
   BETTER_STACK_TOKEN: z.string().optional(),
@@ -18,6 +19,7 @@ export const config = {
   port: parseInt(envVars.PORT, 10),
   isProduction: envVars.NODE_ENV === 'production',
   database: {
+    client: envVars.DATABASE_CLIENT,
     url: envVars.DATABASE_URL,
   },
   sentry: {
